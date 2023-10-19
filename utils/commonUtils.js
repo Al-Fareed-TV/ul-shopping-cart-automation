@@ -5,6 +5,9 @@ class commonUtils {
   async navigateTo(url) {
     await this.page.goto(url, { fullScreen: true });
   }
+  async getPageTitle(){
+    return await this.page.title();
+  }
   async isElementPresent(selector) {
     const elementHandle = await this.page.isVisible(selector);
     if (elementHandle) {
