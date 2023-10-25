@@ -6,13 +6,15 @@ class CartPage {
   async viewCart() {
     await this.page.click("#cart-icon-bubble > svg");
   }
+
   async getNameOfItemInCart() {
-    const selector = await this.page.$(
-      "#CartItem-1 > td.cart-item__details > a"
-    );
-    const text = await selector.textContent();
+    const selector = "#CartItem-1 > td.cart-item__details > a";
+    const timeout = 10000;
+    let nameOfItem =  await this.page.waitForSelector(selector, { timeout });
+    const text = await  nameOfItem.textContent();
     return text;
   }
+
   async getNumberOfItemsInCart() {
     const inputElement = await this.page.$("#Quantity-1");
 
