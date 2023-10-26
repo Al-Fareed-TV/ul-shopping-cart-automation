@@ -3,7 +3,7 @@ class PaymentPage{
         this.page = page;
     }
     async optCOD(){
-        await page.waitForTimeout(2000);
+        await this.page.waitForTimeout(2000);
         await this.page.click('id=basic-paymentOnDelivery');
     }
     async completeOrder(){

@@ -18,13 +18,12 @@ class MainNavigation {
       switch (option.toLowerCase()) {
         case "home":
           return "#menu-drawer > div > div > nav > ul > li:nth-child(1) > a";
-          break;
         case "store":
           return "#menu-drawer > div > div > nav > ul > li:nth-child(2) > a";
-          break;
         case "contact":
           return "#menu-drawer > div > div > nav > ul > li:nth-child(3) > a";
-          break;
+        case "login":
+          return "#menu-drawer > div > div > div > a";
         default:
           return null;
       }
@@ -32,13 +31,12 @@ class MainNavigation {
       switch (option.toLowerCase()) {
         case "home":
           return "#shopify-section-header > sticky-header > header > nav > ul > li:nth-child(1) > a";
-          break;
         case "store":
           return "#shopify-section-header > sticky-header > header > nav > ul > li:nth-child(2) > a";
-          break;
         case "contact":
           return "#shopify-section-header > sticky-header > header > nav > ul > li:nth-child(3) > a";
-          break;
+        case "login":
+          return "#shopify-section-header > sticky-header > header > div > a.header__icon.header__icon--account.link.focus-inset.small-hide";
         default:
           return null;
       }

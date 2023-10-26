@@ -1,20 +1,18 @@
-const getCredentials = require('../data/config.json')
+const getCredentials = require("../data/config.json");
+const MainNavigation = require("../utils/MainNavigation");
 class LoginPage {
   constructor(page) {
     this.page = page;
   }
 
   async login() {
-    await this.page
-      .locator(
-        "#shopify-section-header > sticky-header > header > div > a.header__icon.header__icon--account.link.focus-inset.small-hide"
-      )
-      .click();
-      await this.page.type('#CustomerEmail',getCredentials.email)
-      await this.page.type('#CustomerPassword',getCredentials.password)
-      
-      await this.page.click('#customer_login > button');
-      await this.page.waitForTimeout(2000); 
+    const mainNav = new MainNavigation(this.page);
+    mainNav.selectNav("login");
+    await this.page.type("#CustomerEmail", getCredentials.email);
+    await this.page.type("#CustomerPassword", getCredentials.password);
+
+    await this.page.click("#customer_login > button");
+    await this.page.waitForTimeout(2000);
   }
 
   async isLoggedIn() {

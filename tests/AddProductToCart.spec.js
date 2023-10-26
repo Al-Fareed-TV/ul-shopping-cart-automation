@@ -7,11 +7,12 @@ const commonUtils = require("../utils/commonUtils");
 const PaymentPage = require("../pages/PaymentPage");
 
 test("Adding product to cart", async ({ page }) => {
+  test.setTimeout(120000);
   const loginPage = new LoginPage(page);
   const catalogPage = new CatalogPage(page);
   const productPage = new ProductPage(page);
   const cartPage = new CartPage(page);
-  const paymentPage = new PaymentPage();
+  const paymentPage = new PaymentPage(page);
 
   const utils = new commonUtils(page);
 
@@ -20,7 +21,7 @@ test("Adding product to cart", async ({ page }) => {
 
   let pageTitle = await utils.getPageTitle();
   if (pageTitle === "Challenge – ul-web-playground") {
-    await page.waitForTimeout(1000);
+    await page.waitForTimeout(20000);
   }
 
   await utils.navigateTo("https://web-playground.ultralesson.com/");
@@ -48,5 +49,7 @@ test("Adding product to cart", async ({ page }) => {
     await paymentPage.completeOrder();
   }
   await page.waitForTimeout(2000);
+  test.setTimeout(60000);
+
 } );
 // npx playwright test tests/AddProductToCart.spec.js --project=chromium --headed
