@@ -12,9 +12,9 @@ test("Select a product", async ({ page }) => {
 
   await mainNav.selectNav("store");
 
-  await storePage.selectAvailability();
-  await storePage.selectSortBy();
+  await storePage.filterProducts();
 
   await page.waitForTimeout(2500);
+  
 });
-// npx playwright test tests/StorePage.spec.js --project=chromium --headed 
+// npx playwright test tests/StorePageTest.spec.js --project=chromium --headed 

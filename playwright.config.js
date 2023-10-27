@@ -33,27 +33,27 @@ module.exports = defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
-    {
-      name: "chromium",
-      use: {
-        ...devices["Desktop Chromium"],
-        viewport : null,
-        launchOptions: {
-          args: ["--start-maximized"], // starting the browser in full screen
-          slowMo: 1000, // a 1000 milliseconds pause before each operation. Useful for slow systems.
-        },
-      },
-    },
+    // {
+    //   name: "chromium",
+    //   use: {
+    //     ...devices["Desktop Chromium"],
+    //     viewport : null,
+    //     launchOptions: {
+    //       args: ["--start-maximized"], // starting the browser in full screen
+    //       slowMo: 1000, // a 1000 milliseconds pause before each operation. Useful for slow systems.
+    //     },
+    //   },
+    // },
 
-    {
-      name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
-    },
+    // {
+    //   name: 'firefox',
+    //   use: { ...devices['Desktop Firefox'] },
+    // },
 
-    {
-      name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
-    },
+    // {
+    //   name: 'webkit',
+    //   use: { ...devices['Desktop Safari'] },
+    // },
 
     /* Test against mobile viewports. */
     // {
