@@ -1,17 +1,21 @@
 const getCredentials = require("../data/config.json");
 const MainNavigation = require("../utils/MainNavigation");
+const Actions = require("../utils/actions")
+
 class LoginPage {
   constructor(page) {
     this.page = page;
+    this.actions = new Actions(this.page);
+    this.mainNav = new MainNavigation(this.page);
   }
 
   async login() {
-    const mainNav = new MainNavigation(this.page);
-    mainNav.selectNav("login");
-    await this.page.type("#CustomerEmail", getCredentials.email);
-    await this.page.type("#CustomerPassword", getCredentials.password);
+    await this.mainNav.selectNav("login");
+    
+    await this.actions.sendKeys("#CustomerEmail", getCredentials.email)
+    await this.actions.sendKeys("#CustomerPassword", getCredentials.password);
 
-    await this.page.click("#customer_login > button");
+    await this.actions.clickOnElementByText("Sign in")
     await this.page.waitForTimeout(2000);
   }
 

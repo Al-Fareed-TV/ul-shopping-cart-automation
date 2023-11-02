@@ -1,10 +1,13 @@
+const Actions = require("../utils/actions");
+
 class CartPage {
   constructor(page) {
     this.page = page;
+    this.actions = new Actions(this.page);
   }
 
   async viewCart() {
-    await this.page.click("#cart-icon-bubble > svg");
+    await this.actions.clickOnSelector('#cart-icon-bubble > svg');
   }
 
   async getNameOfItemInCart() {
@@ -22,7 +25,7 @@ class CartPage {
     return inputValue;
   }
   async checkout() {
-    await this.page.click("#checkout");
+    await this.actions.clickOnElementById('checkout')
   }
 }
 
