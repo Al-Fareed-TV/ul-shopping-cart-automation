@@ -18,10 +18,10 @@ class StorePage {
     await this.actions.clickOnElementByText("Filter and sort");
 
     // Click on availability
-    // await this.actions.clickOnSelector(
-    //   "#FacetFiltersFormMobile > div > div.mobile-facets__main > details:nth-child(1) > summary > div"
-    // );
-    await this.actions.clickOnElementByText("Availability");
+    await this.actions.clickOnSelector(
+      "#FacetFiltersFormMobile > div > div.mobile-facets__main > details:nth-child(1) > summary > div"
+    );
+    // await this.actions.clickOnElementByText("Availability");
 
     // Click option (In stocks)
     await this.actions.clickOnSelector(

@@ -5,6 +5,7 @@ const ProductPage = require("../pages/productPage");
 const CartPage = require("../pages/cartPage");
 const commonUtils = require("../utils/commonUtils");
 const PaymentPage = require("../pages/PaymentPage");
+const { log } = require("console");
 
 test("Adding product to cart", async ({ page }) => {
   test.setTimeout(120000);
@@ -16,27 +17,39 @@ test("Adding product to cart", async ({ page }) => {
 
   const utils = new commonUtils(page);
 
-  await utils.navigateTo("https://web-playground.ultralesson.com/");
+  await utils.navigateToHome();
   await loginPage.login();
 
   let pageTitle = await utils.getPageTitle();
   if (pageTitle === "Challenge – ul-web-playground") {
-    await page.waitForTimeout(20000);
+    await page.waitForTimeout(2000);
   }
 
-  await utils.navigateTo("https://web-playground.ultralesson.com/");
+  await utils.navigateToHome();
   await expect(page).toHaveTitle(/ul-web-playground/);
 
   await catalogPage.searchProduct("Jeans");
   await catalogPage.selectProduct();
   await expect(page).toHaveTitle(/Belted Jeans – ul-web-playground/);
 
+  // let isImageAvail = await productPage.isImageAvailable();
+  // expect(isImageAvail).toBeTruthy();
+  // log("Is Image Available ", isImageAvail)
+  
+  // let isAddToCartButtonClickable = await productPage.isAddToCartButtonClickable();
+  // expect(isAddToCartButtonClickable).toBeTruthy();
+  // log('isAddToCartButtonClickable : ',isAddToCartButtonClickable)
+  
+  // let isBuyNoButtonClickable = await productPage.isBuyNowButtonClickable();
+  // expect(isBuyNoButtonClickable).toBeTruthy();
+  // log('isBuyNoButtonClickable : ',isBuyNoButtonClickable)
+
   await productPage.addQty();
   await productPage.addToCart();
   await productPage.waitForCountElementPresent();
-
+  
   await cartPage.viewCart();
-  await page.waitForTimeout(1000);
+  // await page.waitForTimeout(1000);
   const nameOfItemInCart = await cartPage.getNameOfItemInCart();
   expect(nameOfItemInCart).toContain("Belted Jeans");
   const numberOfItemsInCart = await cartPage.getNumberOfItemsInCart();

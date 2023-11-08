@@ -9,7 +9,7 @@ class MainNavigation {
 
   async isSideNavPresent() {
     const utils = new commonUtils(this.page);
-    return utils.isElementPresent(this.sideNavElementLocator);
+    return utils.isElementVisible(this.sideNavElementLocator);
   }
 
   async getSelector(option) {

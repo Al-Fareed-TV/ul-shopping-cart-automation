@@ -39,6 +39,7 @@ module.exports = defineConfig({
     //     ...devices["Desktop Chromium"],
     //     viewport : null,
     //     launchOptions: {
+    //       headless:false,
     //       args: ["--start-maximized"], // starting the browser in full screen
     //       slowMo: 1000, // a 1000 milliseconds pause before each operation. Useful for slow systems.
     //     },
@@ -47,36 +48,50 @@ module.exports = defineConfig({
 
     // {
     //   name: 'firefox',
-    //   use: { ...devices['Desktop Firefox'] },
+    //   use: { ...devices['Desktop Firefox'],
+    //   launchOptions: {
+    //     headless:false
+    //   }
+    //  },
     // },
 
     // {
     //   name: 'webkit',
-    //   use: { ...devices['Desktop Safari'] },
+    //   use: { ...devices['Desktop Safari'],
+    //   launchOptions: {
+    //     headless:false
+    //   }
+    // },
     // },
 
     /* Test against mobile viewports. */
-    {
-      name: 'Mobile Chrome',
-      use: { ...devices['Pixel 5'] },
-    },
-    {
-      name: 'Mobile Safari',
-      use: { ...devices['iPhone 12'] },
-    },
-
-    /* Test against branded browsers. */
     // {
-    //   name: 'Microsoft Edge',
-    //   use: { ...devices['Desktop Edge'], channel: 'msedge' },
+    //   name: 'Mobile Chrome',
+    //   use: { ...devices['Pixel 5'],
+    //   launchOptions: {
+    //     headless:false
+    //   }
+    //  },
     // },
     // {
-    //   name: 'Google Chrome',
-    //   use: { ...devices['Desktop Chrome'], channel: 'chrome' },
+    //   name: 'Mobile Safari',
+    //   use: { ...devices['iPhone 12'],
+    //   launchOptions: {
+    //     headless:false
+    //   }
+    //  },
     // },
+    {
+      name: 'Google Chrome',
+      use: { ...devices['Desktop Chrome'], channel: 'chrome',
+      launchOptions: {
+        headless:false
+      }
+     },
+    },
   ],
 
-  /* Run your local dev server before starting the tests */
+  /*Run your local dev server before starting the tests */
   // webServer: {
   //   command: 'npm run start',
   //   url: 'http://127.0.0.1:3000',

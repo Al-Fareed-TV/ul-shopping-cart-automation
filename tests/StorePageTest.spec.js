@@ -8,7 +8,7 @@ test("Select a product", async ({ page }) => {
   const mainNav = new MainNavigation(page);
   const storePage = new StorePage(page);
 
-  await utils.navigateTo("https://web-playground.ultralesson.com/");
+  await utils.navigateToHome();
 
   await mainNav.selectNav("store");
 

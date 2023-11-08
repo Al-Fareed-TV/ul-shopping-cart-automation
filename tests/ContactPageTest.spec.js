@@ -9,8 +9,8 @@ test("Send message in Contact Page", async ({ page }) => {
   const contactPage = new ContactPage(page);
 
   // await page.setViewportSize({ width: 800, height: 800 }); 
-  await utils.navigateTo("https://web-playground.ultralesson.com/");
-
+  await utils.navigateToHome();
+  
   await mainNav.selectNav('contact');
 
   await expect(page).toHaveTitle(/Contact – ul-web-playground/);

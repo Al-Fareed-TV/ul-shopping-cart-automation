@@ -16,6 +16,9 @@ class Actions {
   async sendKeys(selector, keys) {
     await this.page.fill(selector, keys);
   }
+  async sendKeysByPlaceholder(placeholder, keys) {
+    await this.page.getByPlaceholder(placeholder).fill(keys);
+  }
 }
 
 module.exports = Actions;
