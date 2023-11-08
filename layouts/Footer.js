@@ -22,6 +22,11 @@ class Footer {
       "#shopify-section-footer > footer > div.footer__content-top.page-width > div.footer__blocks-wrapper.grid.grid--1-col.grid--2-col.grid--4-col-tablet > div.footer-block.grid__item.footer-block--menu > ul > li > a"
     );
   }
+  async isSearchLinkClickable() {
+    return await this.utils.isElementClickable(
+      "#shopify-section-footer > footer > div.footer__content-top.page-width > div.footer__blocks-wrapper.grid.grid--1-col.grid--2-col.grid--4-col-tablet > div.footer-block.grid__item.footer-block--menu > ul > li > a"
+    );
+  }
   async subscribeToPage() {
     await this.actions.sendKeysByPlaceholder("Email", "roshan@testvagrant.com");
     const navigationPromise = this.page.waitForNavigation();

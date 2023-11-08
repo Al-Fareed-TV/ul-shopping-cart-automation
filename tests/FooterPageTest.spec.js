@@ -18,6 +18,9 @@ test("Test footer elements", async ({ page }) => {
   const isSearchLinkPresent = await footer.isSearchLinkPresent();
   expect(isSearchLinkPresent).toBeTruthy();
 
+  const isSearchLinkClickable = await footer.isSearchLinkClickable();
+  expect(isSearchLinkClickable).toBeTruthy();
+
   await footer.changeCountryRegion();
 
   await footer.subscribeToPage();
