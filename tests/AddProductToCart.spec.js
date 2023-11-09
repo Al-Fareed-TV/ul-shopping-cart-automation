@@ -32,18 +32,6 @@ test("Adding product to cart", async ({ page }) => {
   await catalogPage.selectProduct();
   await expect(page).toHaveTitle(/Belted Jeans – ul-web-playground/);
 
-  // let isImageAvail = await productPage.isImageAvailable();
-  // expect(isImageAvail).toBeTruthy();
-  // log("Is Image Available ", isImageAvail)
-  
-  // let isAddToCartButtonClickable = await productPage.isAddToCartButtonClickable();
-  // expect(isAddToCartButtonClickable).toBeTruthy();
-  // log('isAddToCartButtonClickable : ',isAddToCartButtonClickable)
-  
-  // let isBuyNoButtonClickable = await productPage.isBuyNowButtonClickable();
-  // expect(isBuyNoButtonClickable).toBeTruthy();
-  // log('isBuyNoButtonClickable : ',isBuyNoButtonClickable)
-
   await productPage.addQty();
   await productPage.addToCart();
   await productPage.waitForCountElementPresent();
@@ -62,7 +50,6 @@ test("Adding product to cart", async ({ page }) => {
     await paymentPage.completeOrder();
   }
   await page.waitForTimeout(2000);
-  test.setTimeout(60000);
 
 } );
 // npx playwright test tests/AddProductToCart.spec.js --project=chromium --headed

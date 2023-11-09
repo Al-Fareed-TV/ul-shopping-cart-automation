@@ -33,18 +33,18 @@ module.exports = defineConfig({
 
   /* Configure projects for major browsers */
   projects: [
-    // {
-    //   name: "chromium",
-    //   use: {
-    //     ...devices["Desktop Chromium"],
-    //     viewport : null,
-    //     launchOptions: {
-    //       headless:false,
-    //       args: ["--start-maximized"], // starting the browser in full screen
-    //       slowMo: 1000, // a 1000 milliseconds pause before each operation. Useful for slow systems.
-    //     },
-    //   },
-    // },
+    {
+      name: "chromium",
+      use: {
+        ...devices["Desktop Chromium"],
+        viewport : null,
+        launchOptions: {
+          headless:false,
+          args: ["--start-maximized"], // starting the browser in full screen
+          slowMo: 1000, // a 1000 milliseconds pause before each operation. Useful for slow systems.
+        },
+      },
+    },
 
     // {
     //   name: 'firefox',
@@ -81,14 +81,14 @@ module.exports = defineConfig({
     //   }
     //  },
     // },
-    {
-      name: 'Google Chrome',
-      use: { ...devices['Desktop Chrome'], channel: 'chrome',
-      launchOptions: {
-        headless:false
-      }
-     },
-    },
+    // {
+    //   name: 'Google Chrome',
+    //   use: { ...devices['Desktop Chrome'], channel: 'chrome',
+    //   launchOptions: {
+    //     headless:false
+    //   }
+    //  },
+    // },
   ],
 
   /*Run your local dev server before starting the tests */

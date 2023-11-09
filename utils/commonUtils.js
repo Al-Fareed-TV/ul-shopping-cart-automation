@@ -1,9 +1,11 @@
+const { log } = require("console");
+
 class commonUtils {
   constructor(page) {
     this.page = page;
   }
   async navigateTo(url) {
-    await this.page.goto(url, { fullScreen: true });
+    await this.page.goto(url);
   }
   async getPageTitle() {
     return await this.page.title();
@@ -31,10 +33,23 @@ class commonUtils {
       return false;
     }
   }
+  async isElementEnabled(selector) {
+    await this.page.waitForTimeout(500);
+    const element = await this.page.$(selector);
+
+    if (element) {
+        return await element.isEnabled();
+      } else {
+        return false; 
+    }
+}
 
   async isElementPresent(selector) {
     const element = await this.page.$(selector);
     return element !== null ? element : false;
+  }
+  async waitToLoad(){
+    await this.page.waitForTimeout(1500);
   }
 
   async getText(selector){

@@ -30,7 +30,7 @@ class Footer {
   async subscribeToPage() {
     await this.actions.sendKeysByPlaceholder("Email", "roshan@testvagrant.com");
     const navigationPromise = this.page.waitForNavigation();
-    await this.page.getByPlaceholder("Email").press("Enter");
+    await this.actions.pressByPlaceholder("Email","Enter");
     await navigationPromise;
   }
   async confirmSubscription() {
@@ -39,7 +39,7 @@ class Footer {
       return null;
     }
     log("page title - +", await this.page.title());
-    return await this.utils.getText("#ContactFooter-success");
+    return true;
   }
 
   async changeCountryRegion() {

@@ -4,6 +4,7 @@ const MainNavigation = require("../utils/MainNavigation");
 const StorePage = require("../pages/StorePage");
 
 test("Select a product", async ({ page }) => {
+  test.setTimeout(120000);
   const utils = new commonUtils(page);
   const mainNav = new MainNavigation(page);
   const storePage = new StorePage(page);
@@ -13,6 +14,12 @@ test("Select a product", async ({ page }) => {
   await mainNav.selectNav("store");
 
   await storePage.filterProducts();
+
+  await storePage.checkInStockProducts();
+  await storePage.checkOutOfStockProducts();
+
+  await storePage.verifyProductsOutOfStock();
+  await storePage.filterBrands();
 
   await page.waitForTimeout(2500);
   

@@ -16,6 +16,13 @@ class Actions {
   async sendKeys(selector, keys) {
     await this.page.fill(selector, keys);
   }
+  async press(key){
+    await this.page.keyboard.press(key);
+  }
+  async pressByPlaceholder(placeholder,key){
+    await this.page.getByPlaceholder("Email").press("Enter");
+    await this.page.getByPlaceholder(placeholder).press(key);
+  }
   async sendKeysByPlaceholder(placeholder, keys) {
     await this.page.getByPlaceholder(placeholder).fill(keys);
   }
