@@ -4,9 +4,9 @@ const MainNavigation = require('../utils/MainNavigation');
 const ContactPage = require('../pages/ContactPage');
 
 test("Send message in Contact Page", async ({ page }) => {
-  const utils = new commonUtils(page);
-  const mainNav = new MainNavigation(page);
-  const contactPage = new ContactPage(page);
+  const utils = commonUtils.createUtils(page);
+  const mainNav = MainNavigation.createMainNav(page);
+  const contactPage = ContactPage.createContactPage(page);
 
   // await page.setViewportSize({ width: 800, height: 800 }); 
   await utils.navigateToHome();

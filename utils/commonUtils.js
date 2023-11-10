@@ -1,8 +1,12 @@
 const { log } = require("console");
+const { retries } = require("../playwright.config");
 
 class commonUtils {
   constructor(page) {
     this.page = page;
+  }
+  static createUtils(page) {
+    return new commonUtils(page);
   }
   async navigateTo(url) {
     await this.page.goto(url);
@@ -25,7 +29,8 @@ class commonUtils {
       return false;
     }
   }
-  async isElementClickable(selector){
+
+  async isElementClickable(selector) {
     try {
       await this.page.click(selector);
       return true;
@@ -33,33 +38,37 @@ class commonUtils {
       return false;
     }
   }
-  async isElementEnabled(selector) {
-    await this.page.waitForTimeout(500);
-    const element = await this.page.$(selector);
+  async isElementEnabled(element) {
+    return await element.isEnabled();
+  }
 
-    if (element) {
-        return await element.isEnabled();
-      } else {
-        return false; 
-    }
-}
+  async getByRoleAndName(role, text) {
+    return await this.page.getByRole(role, { name: text });
+  }
 
   async isElementPresent(selector) {
     const element = await this.page.$(selector);
     return element !== null ? element : false;
   }
-  async waitToLoad(){
+  async waitToLoad() {
     await this.page.waitForTimeout(1500);
   }
 
-  async getText(selector){
-    const text = await this.page.$eval(selector, element => element.textContent);
+  async getText(selector) {
+    const text = await this.page.$eval(
+      selector,
+      (element) => element.textContent
+    );
     return text;
   }
 
-  async isHeaderAndFooterPresent(){
-    const isHeaderPresent = await this.isElementPresent('.header header--middle-left page-width header--has-menu');
-    const isFooterPresent = await this.isElementPresent('.footer__content-top page-width');
+  async isHeaderAndFooterPresent() {
+    const isHeaderPresent = await this.isElementPresent(
+      ".header header--middle-left page-width header--has-menu"
+    );
+    const isFooterPresent = await this.isElementPresent(
+      ".footer__content-top page-width"
+    );
     return isHeaderPresent && isFooterPresent;
   }
 }

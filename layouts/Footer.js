@@ -7,6 +7,9 @@ class Footer {
     this.utils = new commonUtils(page);
     this.actions = new Actions(page);
   }
+  static createFooterInstance(page) {
+    return new Footer(page);
+  }
   async isFooterPresent() {
     return await this.utils.isElementPresent(
       "#shopify-section-footer > footer"

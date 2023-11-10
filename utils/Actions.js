@@ -2,9 +2,19 @@ class Actions {
   constructor(page) {
     this.page = page;
   }
+  static createActionInstance(page) {
+    return new Actions(page);
+  }
 
   async clickOnSelector(selector) {
     await this.page.click(selector);
+  }
+
+  async clickOnElementByRoleAndText(role, text) {
+    await await this.page.getByRole(role, { name: text }).click();
+  }
+  async clickOnElement(element){
+    await this.page.click(element);
   }
   async clickOnElementById(id) {
     await this.page.click(`id=${id}`);
@@ -26,6 +36,12 @@ class Actions {
   async sendKeysByPlaceholder(placeholder, keys) {
     await this.page.getByPlaceholder(placeholder).fill(keys);
   }
+
+  async clickOnElementWhichHasText(locator, text) {
+    await this.page.locator(locator).getByText(text).click();
+  }
+  
 }
+
 
 module.exports = Actions;

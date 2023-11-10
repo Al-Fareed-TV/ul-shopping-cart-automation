@@ -23,6 +23,9 @@ class LoginPage {
     const pageTitle = await page.title();
     return pageTitle;
   }
+  static createLoginPage(page) {
+    return new LoginPage(page);
+  }
 }
 
 module.exports = LoginPage;

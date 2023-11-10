@@ -17,6 +17,9 @@ class ContactPage{
     async sendComment(){
         await this.actions.clickOnElementByText('Send');
     }
+    static createContactPage(page) {
+        return new ContactPage(page);
+      }
 }
 module.exports = ContactPage;
   

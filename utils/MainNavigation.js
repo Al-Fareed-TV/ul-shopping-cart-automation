@@ -6,6 +6,9 @@ class MainNavigation {
     this.sideNavElementLocator =
       "#shopify-section-header > sticky-header > header > header-drawer > details > summary > span > svg.icon.icon-hamburger";
   }
+  static createMainNav(page) {
+    return new MainNavigation(page);
+  }
 
   async isSideNavPresent() {
     const utils = new commonUtils(this.page);

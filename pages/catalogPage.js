@@ -13,6 +13,9 @@ class CatalogPage {
   async selectProduct() {
     await this.actions.clickOnSelector('li.predictive-search__list-item:first-child')
   }
+  static createCatalogPage(page){
+    return new CatalogPage(page);
+  }
 }
 
 module.exports = CatalogPage;

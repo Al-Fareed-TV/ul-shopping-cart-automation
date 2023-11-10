@@ -9,13 +9,12 @@ const { log } = require("console");
 
 test("Adding product to cart", async ({ page }) => {
   test.setTimeout(120000);
-  const loginPage = new LoginPage(page);
-  const catalogPage = new CatalogPage(page);
-  const productPage = new ProductPage(page);
-  const cartPage = new CartPage(page);
-  const paymentPage = new PaymentPage(page);
-
-  const utils = new commonUtils(page);
+  const loginPage = LoginPage.createLoginPage(page);
+  const catalogPage = CatalogPage.createCatalogPage(page);
+  const productPage = ProductPage.createProductPage(page);
+  const cartPage =  CartPage.createCartPage(page);
+  const paymentPage = PaymentPage.createPaymentPage(page);
+  const utils =  commonUtils.createUtils(page);
 
   await utils.navigateToHome();
   await loginPage.login();

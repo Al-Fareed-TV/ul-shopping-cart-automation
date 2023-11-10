@@ -4,8 +4,6 @@ const Actions = require("../utils/actions");
 const ProductPage = require("../pages/productPage");
 const commonUtils = require("../utils/commonUtils");
 const { expect } = require("@playwright/test");
-const exp = require("constants");
-const { element } = require("wd/lib/commands");
 
 class StorePage {
   constructor(page) {
@@ -13,6 +11,9 @@ class StorePage {
     this.actions = new Actions(this.page);
     this.productPage = new ProductPage(this.page);
     this.utils = new commonUtils(this.page);
+  }
+  static createStorePage(page) {
+    return new StorePage(page);
   }
 
   async isMobileView() {
@@ -25,9 +26,7 @@ class StorePage {
     await this.actions.clickOnElementByText("Filter and sort");
 
     // Click on availability
-    await this.actions.clickOnSelector(
-      "#FacetFiltersFormMobile > div > div.mobile-facets__main > details:nth-child(1) > summary > div"
-    );
+    await this.actions.clickOnElementByRoleAndText("button", "Availability");
 
     // Click option (In stocks)
     await this.actions.clickOnSelector(
@@ -39,22 +38,17 @@ class StorePage {
       "#FacetFiltersFormMobile > div > div.mobile-facets__main > details.mobile-facets__details.js-filter.menu-opening > div > button"
     );
   }
+
   async outOfStockProducts() {
     await this.actions.clickOnElementByText("Availability");
-    await this.actions.clickOnSelector(
-      "#FacetsWrapperDesktop > details:nth-child(2) > div > ul > li:nth-child(1) > label"
-    );
-    await this.actions.clickOnSelector(
-      "#FacetsWrapperDesktop > details:nth-child(2) > div > ul > li:nth-child(2) > label"
-    );
+    await this.actions.clickOnElementByText("In stock");
+    await this.actions.clickOnElementByText("Out of stock");
     await this.page.keyboard.press("Escape");
   }
 
   async checkInStockAvailabilityDesktop() {
     await this.actions.clickOnElementByText("Availability");
-    await this.actions.clickOnSelector(
-      "#FacetsWrapperDesktop > details:nth-child(2) > div > ul > li:nth-child(1) > label"
-    );
+    await this.actions.clickOnElementByText("In stock");
     await this.page.keyboard.press("Escape");
   }
 
@@ -71,12 +65,12 @@ class StorePage {
   async sortByDesktop() {
     await this.page.selectOption("#SortBy", "Price, low to high");
     await this.utils.waitToLoad();
-    // await this.page.selectOption("#SortBy", "Price, high to low");
-    // await this.utils.waitToLoad();
-    // await this.page.selectOption("#SortBy", "Date, old to new");
-    // await this.utils.waitToLoad();
-    // await this.page.selectOption("#SortBy", "Alphabetically, Z-A");
-    // await this.utils.waitToLoad();
+    await this.page.selectOption("#SortBy", "Price, high to low");
+    await this.utils.waitToLoad();
+    await this.page.selectOption("#SortBy", "Date, old to new");
+    await this.utils.waitToLoad();
+    await this.page.selectOption("#SortBy", "Alphabetically, Z-A");
+    await this.utils.waitToLoad();
   }
 
   async selectFirstProduct() {
@@ -84,12 +78,21 @@ class StorePage {
   }
 
   async checkForProductAvailability() {
+    const addToCartButton = await this.utils.getByRoleAndName(
+      "button",
+      "Add to cart"
+    );
     const isAddToCartEnabled = await this.utils.isElementEnabled(
-      "#product-form-template--15328405717213__main > div > button"
+      addToCartButton
     );
     expect(isAddToCartEnabled).toBeTruthy();
+
+    const buyNowButton = await this.utils.getByRoleAndName(
+      "button",
+      "Buy it now"
+    );
     const isBuyNowButtonEnabled = await this.utils.isElementEnabled(
-      "#product-form-template--15328405717213__main > div > div > dynamic-checkout > div > shopify-buy-it-now-button > button"
+      buyNowButton
     );
     expect(isBuyNowButtonEnabled).toBeTruthy();
   }
@@ -101,10 +104,14 @@ class StorePage {
     await this.actions.press("Escape");
   }
   async verifyProductsOutOfStock() {
-    const isButtonEnabled = await this.utils.isElementEnabled(
-      "product-form__submit button button--full-width button--secondary"
+    const soldOutButton = await this.utils.getByRoleAndName(
+      "button",
+      "Sold out"
     );
-    expect(isButtonEnabled).toBeFalsy();
+    const isSoldOutButtonEnabled = await this.utils.isElementEnabled(
+      soldOutButton
+    );
+    expect(isSoldOutButtonEnabled).toBeFalsy();
   }
 
   async filterProducts() {
@@ -130,7 +137,7 @@ class StorePage {
     await this.verifyProductsOutOfStock();
   }
   async elements(i) {
-    return `#FacetsWrapperDesktop > details:nth-child(5) > div > ul > li:nth-child(${i}) > label`;
+    return `#FacetsWrapperDesktop > details:nth-child(5) > div li:nth-child(${i})`;
   }
   async filterBrands() {
     await this.page.goBack();
@@ -149,3 +156,4 @@ class StorePage {
 }
 
 module.exports = StorePage;
+

@@ -10,5 +10,8 @@ class PaymentPage{
     async completeOrder(){
         await this.actions.clickOnElementByText("Complete order")
     }
+    static createPaymentPage(page) {
+        return new PaymentPage(page);
+      }
 }
 module.exports = PaymentPage;

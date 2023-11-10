@@ -2,8 +2,8 @@ import { test, expect } from "@playwright/test";
 const Footer = require("../layouts/Footer");
 const commonUtils = require("../utils/commonUtils");
 test("Test footer elements", async ({ page }) => {
-  const footer = new Footer(page);
-  const utils = new commonUtils(page);
+  const footer = Footer.createFooterInstance(page);
+  const utils = commonUtils.createUtils(page);
 
   await utils.navigateToHome();
 

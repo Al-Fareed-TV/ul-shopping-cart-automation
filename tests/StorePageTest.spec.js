@@ -5,9 +5,9 @@ const StorePage = require("../pages/StorePage");
 
 test("Select a product", async ({ page }) => {
   test.setTimeout(120000);
-  const utils = new commonUtils(page);
-  const mainNav = new MainNavigation(page);
-  const storePage = new StorePage(page);
+  const utils = commonUtils.createUtils(page);
+  const mainNav = MainNavigation.createMainNav(page);
+  const storePage = StorePage.createStorePage(page);
 
   await utils.navigateToHome();
 

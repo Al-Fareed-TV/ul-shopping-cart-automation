@@ -7,6 +7,9 @@ class ProductPage {
     this.actions = new Actions(this.page);
     this.utils = new utils(this.page);
   }
+  static createProductPage(page) {
+    return new ProductPage(page);
+  }
 
   async isImageAvailable() {
     try {

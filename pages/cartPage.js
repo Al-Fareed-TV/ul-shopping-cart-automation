@@ -27,6 +27,9 @@ class CartPage {
   async checkout() {
     await this.actions.clickOnElementById('checkout')
   }
+  static createCartPage(page){
+   return new CartPage(page);
+  }
 }
 
 module.exports = CartPage;
