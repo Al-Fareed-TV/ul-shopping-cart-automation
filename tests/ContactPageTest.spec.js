@@ -10,7 +10,7 @@ test("Send message in Contact Page", async ({ page }) => {
 
   // await page.setViewportSize({ width: 800, height: 800 }); 
   await utils.navigateToHome();
-  
+
   await mainNav.selectNav('contact');
 
   await expect(page).toHaveTitle(/Contact – ul-web-playground/);
@@ -19,7 +19,7 @@ test("Send message in Contact Page", async ({ page }) => {
   await contactPage.addComment();
   await contactPage.sendComment();
 
-  await page.waitForTimeout(2000); 
+  await page.waitForTimeout(2000);
 });
 
 // npx playwright test tests/ContactPageTest.spec.js --project=chromium --headed 

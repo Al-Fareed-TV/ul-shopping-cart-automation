@@ -13,7 +13,7 @@ class CatalogPage {
   async selectProduct() {
     await this.actions.clickOnSelector('li.predictive-search__list-item:first-child')
   }
-  static createCatalogPage(page){
+  static createCatalogPage(page) {
     return new CatalogPage(page);
   }
 }
