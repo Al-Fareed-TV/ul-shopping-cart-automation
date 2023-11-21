@@ -8,9 +8,9 @@ const { expect } = require("@playwright/test");
 class StorePage {
   constructor(page) {
     this.page = page;
-    this.actions = new Actions(this.page);
-    this.productPage = new ProductPage(this.page);
-    this.utils = new commonUtils(this.page);
+    this.actions = Actions.createActionInstance(this.page);
+    this.productPage = ProductPage.createProductPage(this.page);
+    this.utils = commonUtils.createUtils(this.page);
   }
   static createStorePage(page) {
     return new StorePage(page);
@@ -137,15 +137,16 @@ class StorePage {
     await this.verifyProductsOutOfStock();
   }
   async elements(i) {
-    return `#FacetsWrapperDesktop > details:nth-child(5) > div li:nth-child(${i})`;
+    return await this.page.$(`#FacetsWrapperDesktop > details:nth-child(5) > div > ul > li:nth-child(${i}) > label`);
   }
+  
   async filterBrands() {
     await this.page.goBack();
     await this.actions.clickOnElementByText("Brand");
 
     for (let i = 1; i <= 10; i++) {
       if (await this.utils.isElementEnabled(await this.elements(i))) {
-        await this.actions.clickOnSelector(await this.elements(i));
+        await this.actions.clickOnElement(await this.elements(i));
       } else {
         log("Cant click on disabled option");
       }

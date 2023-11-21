@@ -2,7 +2,7 @@ const Actions = require("../utils/actions")
 class CatalogPage {
   constructor(page) {
     this.page = page;
-    this.actions = new Actions(this.page);
+    this.actions = Actions.createActionInstance(this.page);
   }
 
   async searchProduct(productName) {

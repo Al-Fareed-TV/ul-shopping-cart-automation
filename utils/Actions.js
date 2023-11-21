@@ -26,6 +26,9 @@ class Actions {
   async sendKeys(selector, keys) {
     await this.page.fill(selector, keys);
   }
+  async typeKeys(locator,keys){
+    await this.page.locator(locator).pressSequentially(keys, { delay: 150 });
+  }
   async press(key){
     await this.page.keyboard.press(key);
   }

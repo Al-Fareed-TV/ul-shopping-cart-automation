@@ -28,6 +28,8 @@ module.exports = defineConfig({
     // baseURL: 'http://127.0.0.1:3000',
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+    headless:false,
+    screenshot: 'only-on-failure',
     trace: 'on-first-retry',
   },
 
@@ -39,7 +41,6 @@ module.exports = defineConfig({
         ...devices["Desktop Chromium"],
         viewport : null,
         launchOptions: {
-          headless:false,
           args: ["--start-maximized"], // starting the browser in full screen
           slowMo: 1000, // a 1000 milliseconds pause before each operation. Useful for slow systems.
         },
@@ -49,18 +50,12 @@ module.exports = defineConfig({
     // {
     //   name: 'firefox',
     //   use: { ...devices['Desktop Firefox'],
-    //   launchOptions: {
-    //     headless:false
-    //   }
     //  },
     // },
 
     // {
     //   name: 'webkit',
     //   use: { ...devices['Desktop Safari'],
-    //   launchOptions: {
-    //     headless:false
-    //   }
     // },
     // },
 
@@ -68,25 +63,16 @@ module.exports = defineConfig({
     // {
     //   name: 'Mobile Chrome',
     //   use: { ...devices['Pixel 5'],
-    //   launchOptions: {
-    //     headless:false
-    //   }
     //  },
     // },
     // {
     //   name: 'Mobile Safari',
     //   use: { ...devices['iPhone 12'],
-    //   launchOptions: {
-    //     headless:false
-    //   }
     //  },
     // },
     // {
     //   name: 'Google Chrome',
     //   use: { ...devices['Desktop Chrome'], channel: 'chrome',
-    //   launchOptions: {
-    //     headless:false
-    //   }
     //  },
     // },
   ],

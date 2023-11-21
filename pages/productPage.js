@@ -4,8 +4,8 @@ const utils = require("../utils/commonUtils");
 class ProductPage {
   constructor(page) {
     this.page = page;
-    this.actions = new Actions(this.page);
-    this.utils = new utils(this.page);
+    this.actions = Actions.createActionInstance(this.page);
+    this.utils = utils.createUtils(this.page);
   }
   static createProductPage(page) {
     return new ProductPage(page);

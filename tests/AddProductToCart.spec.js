@@ -5,23 +5,21 @@ const ProductPage = require("../pages/productPage");
 const CartPage = require("../pages/cartPage");
 const commonUtils = require("../utils/commonUtils");
 const PaymentPage = require("../pages/PaymentPage");
-const { log } = require("console");
 
-test("Adding product to cart", async ({ page }) => {
-  test.setTimeout(120000);
-  const loginPage = LoginPage.createLoginPage(page);
+
+test("Adding product to cart", async () => {
   const catalogPage = CatalogPage.createCatalogPage(page);
   const productPage = ProductPage.createProductPage(page);
-  const cartPage =  CartPage.createCartPage(page);
+  const cartPage = CartPage.createCartPage(page);
   const paymentPage = PaymentPage.createPaymentPage(page);
-  const utils =  commonUtils.createUtils(page);
+  const utils = commonUtils.createUtils(page);
+  const login = LoginPage.createLoginPage(page);
 
-  await utils.navigateToHome();
-  await loginPage.login();
+  login.login();
 
   let pageTitle = await utils.getPageTitle();
   if (pageTitle === "Challenge – ul-web-playground") {
-    await page.waitForTimeout(2000);
+    await page.waitForTimeout(20000);
   }
 
   await utils.navigateToHome();
@@ -34,9 +32,8 @@ test("Adding product to cart", async ({ page }) => {
   await productPage.addQty();
   await productPage.addToCart();
   await productPage.waitForCountElementPresent();
-  
+
   await cartPage.viewCart();
-  // await page.waitForTimeout(1000);
   const nameOfItemInCart = await cartPage.getNameOfItemInCart();
   expect(nameOfItemInCart).toContain("Belted Jeans");
   const numberOfItemsInCart = await cartPage.getNumberOfItemsInCart();
@@ -48,7 +45,18 @@ test("Adding product to cart", async ({ page }) => {
     await paymentPage.optCOD();
     await paymentPage.completeOrder();
   }
-  await page.waitForTimeout(2000);
+});
 
-} );
-// npx playwright test tests/AddProductToCart.spec.js --project=chromium --headed
+
+// test("Another test", async ({}) => {
+//   const page = await context.newPage();
+//   // Another test logic...
+// });
+
+
+
+/* 
+
+npx playwright test tests/AddProductToCart.spec.js --project=chromium --headed
+
+*/

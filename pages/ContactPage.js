@@ -3,7 +3,7 @@ const Actions = require('../utils/actions')
 class ContactPage{
     constructor(page){
         this.page = page;
-        this.actions = new Actions(this.page);
+        this.actions = Actions.createActionInstance(this.page);
     }
     async fillDetails(){
         await this.actions.sendKeys('id=ContactForm-name',getCredentials.name);

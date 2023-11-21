@@ -3,7 +3,7 @@ const Actions = require("../utils/actions");
 class CartPage {
   constructor(page) {
     this.page = page;
-    this.actions = new Actions(this.page);
+    this.actions = Actions.createActionInstance(this.page);
   }
 
   async viewCart() {
@@ -27,6 +27,7 @@ class CartPage {
   async checkout() {
     await this.actions.clickOnElementById('checkout')
   }
+  
   static createCartPage(page){
    return new CartPage(page);
   }

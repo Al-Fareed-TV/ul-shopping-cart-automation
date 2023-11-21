@@ -21,7 +21,7 @@ test("Select a product", async ({ page }) => {
   await storePage.verifyProductsOutOfStock();
   await storePage.filterBrands();
 
-  await page.waitForTimeout(2500);
+  await page.waitForTimeout(2000);
   
 });
 // npx playwright test tests/StorePageTest.spec.js --project=chromium --headed 
