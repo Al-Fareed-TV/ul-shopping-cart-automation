@@ -1,3 +1,5 @@
+const { createDiffieHellmanGroup } = require("crypto");
+
 class SecurePageForStorePage {
     constructor(page, testData) {
         this.page = page;
@@ -81,52 +83,55 @@ class SecurePageForStorePage {
         const message = `This price(${productPrice}) is not in between ${this.testData.priceFrom} to ${this.testData.priceTo}`;
         console.error(message);
     }
-
+    
     get sizeValue() {
-        return this.page.locator(`.js.product-form__input > label`)
+        return this.page.locator('.js.product-form__input > label');
     }
+
     get sizeLocator() {
-        return this.page.locator('.js.product-form__input > legend')
+        return this.page.locator('.js.product-form__input > legend');
     }
+
     get sizeValue1() {
-        return this.page.locator('.js.product-form__input').nth(1).locator('>label')
+        return this.page.locator('.js.product-form__input').nth(1).locator('>label');
     }
+
     async isFilteredAccordingToSizeOrNot(productSizeArray) {
         const priceCount = await this.priceLocator.count();
         for (let i = 0; i < priceCount; i++) {
             await this.priceLocator.nth(i).click();
             let temp = 0;
+
             if ((await this.sizeLocator.first().textContent()).trim() === "Size") {
-                const sizeValueCount = await this.sizeValue.count();
-                for (let j = 0; j < sizeValueCount; j++) {
-                    const productSizeText = (await this.sizeValue.nth(j).textContent()).trim();
-                    if (!productSizeArray.includes(productSizeText) && !(await this.sizeValue.nth(j).isChecked())) {
-                        temp = 1;
-                    }
-                    else {
-                        temp = 0;
-                        break;
-                    }
-                }
+                temp = await this.checkProductSizes(productSizeArray, this.sizeValue);
+            } else {
+                temp = await this.checkProductSizes(productSizeArray, this.sizeValue1);
             }
-    else {
-        const size = await this.page.locator(this.selectors.productSizeSelector).nth(1).locator(this.selectors.sizeLabelSelector).count()
-        for (let i = 0; i < size; i++) {
-            const productSizeText = (await this.page.locator(this.selectors.productSizeSelector).nth(1).locator(this.selectors.sizeLabelSelector).nth(i).textContent()).trim()
-            if (!productSizeArray.includes(productSizeText) && !(await this.sizeValue1.nth(i).isChecked())) {
+
+            if (temp !== 0) {
+                this.logBrandMismatchError();
+            }
+
+            await this.page.goBack();
+        }
+    }
+
+    async checkProductSizes(productSizeArray, sizeValueLocator) {
+        let temp = 0;
+        const sizeValueCount = await sizeValueLocator.count();
+
+        for (let j = 0; j < sizeValueCount; j++) {
+            const productSizeText = (await sizeValueLocator.nth(j).textContent()).trim();
+
+            if (!productSizeArray.includes(productSizeText) && !(await sizeValueLocator.nth(j).isChecked())) {
                 temp = 1;
-            }
-            else {
+            } else {
                 temp = 0;
                 break;
             }
         }
-    }
-            if (temp !== 0) {
-                this.logBrandMismatchError();
-            }
-            await this.page.goBack();
-        }
+
+        return temp;
     }
 
     logBrandMismatchError() {
@@ -134,26 +139,45 @@ class SecurePageForStorePage {
         console.error(errorMessage);
     }
 
-    get productTypeCount(){
-        return this.page.locator('.active-facets.active-facets-desktop > facet-remove > a > span')
+    get productTypeCount() {
+        return this.page.locator('.active-facets.active-facets-desktop > facet-remove > a > span');
     }
-    async isFilteredAccordingToProductTypeOrNot(productTypeArray){
-        const typeCount = await this.productTypeCount.count()
-        for (let i = 0; i < typeCount - 1; i++) {
-            const productType = (await this.productTypeCount.nth(i).first().textContent()).trim();
-            console.log(productType)
 
-            if (!(productTypeArray.includes(productType))) {
+    get productTypeText() {
+        return this.page.locator('.active-facets__button-inner.button.button--tertiary');
+    }
+
+    async isFilteredAccordingToProductTypeOrNot(productTypeArray) {
+        const productTypeCount = await this.getProductTypeCount();
+
+        for (let i = 0; i < productTypeCount - 1; i++) {
+            const productType = await this.getProductTypeText(i);
+            const type = this.extractProductType(productType);
+
+            if (!productTypeArray.includes(type)) {
                 this.logTypeNotFoundError(productType);
             }
         }
     }
 
-    async logTypeNotFoundError(productType) {
-        const errorMessage = `Error: Product type (${productType}) does not match any of the specified types.`;
-        console.error(errorMessage);
+    async getProductTypeCount() {
+        return (await this.productTypeCount.count()) - 1;
     }
 
+    async getProductTypeText(index) {
+        const productType = await this.productTypeText.nth(index).first().textContent();
+        return productType.trim();
+    }
+
+    extractProductType(productType) {
+        const split = productType.split('\n');
+        return split[0].trim();
+    }
+
+    logTypeNotFoundError(productType) {
+        const errorMessage = `Error: Product type '${productType}' not found in the specified types.`;
+        console.error(errorMessage);
+    }
 }
 
 module.exports = { SecurePageForStorePage };
