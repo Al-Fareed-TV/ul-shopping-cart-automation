@@ -13,8 +13,8 @@ class CartPage {
   async getNameOfItemInCart() {
     const selector = "#CartItem-1 > td.cart-item__details > a";
     const timeout = 10000;
-    let nameOfItem =  await this.page.waitForSelector(selector, { timeout });
-    const text = await  nameOfItem.textContent();
+    let nameOfItem = await this.page.waitForSelector(selector, { timeout });
+    const text = await nameOfItem.textContent();
     return text;
   }
 
@@ -27,9 +27,9 @@ class CartPage {
   async checkout() {
     await this.actions.clickOnElementById('checkout')
   }
-  
-  static createCartPage(page){
-   return new CartPage(page);
+
+  static createCartPage(page) {
+    return new CartPage(page);
   }
 }
 

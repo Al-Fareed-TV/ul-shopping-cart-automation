@@ -139,7 +139,7 @@ class StorePage {
   async elements(i) {
     return await this.page.$(`#FacetsWrapperDesktop > details:nth-child(5) > div > ul > li:nth-child(${i}) > label`);
   }
-  
+
   async filterBrands() {
     await this.page.goBack();
     await this.actions.clickOnElementByText("Brand");

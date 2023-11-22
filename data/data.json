@@ -1,0 +1,17 @@
+{
+    "pageUrl":"https://web-playground.ultralesson.com/",
+    "Title":"ul-web-playground",
+    "expectedTextForLoginPage":"Login",
+    "expectedTextForCreateAccountPage":"Create account",
+    "firstName":"Gaurav",
+    "lastName":"Jaiswal",
+    "email":"gaurav@example.com",
+    "password":"@Gaurav123",
+    "expectedTextForCapchaPage":"To continue, let us know you're not a robot.",
+    "expectedTextForStorePage":"Products",
+    "priceFrom":"0",
+    "priceTo":"500",
+    "brandName":["5 Octobre","Anon","Super Duper Hats","Rundholz BL"],
+    "productTypes":["Bags","Fixed Gear Bicycle","Home Accessories","unisex scarves","Womens Outerwear"],
+    "size":["XX-Large","Small","French 36"]
+}

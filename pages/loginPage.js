@@ -11,7 +11,7 @@ class LoginPage {
 
   async login() {
     await this.mainNav.selectNav("login");
-    
+
     await this.actions.typeKeys("#CustomerEmail", getCredentials.email);
     await this.actions.typeKeys("#CustomerPassword", getCredentials.password);
 

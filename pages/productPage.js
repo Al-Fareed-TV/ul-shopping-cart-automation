@@ -39,7 +39,7 @@ class ProductPage {
 
   async isBuyNowButtonClickable() {
     try {
-       await this.utils.isElementClickable(
+      await this.utils.isElementClickable(
         "shopify-payment-button__button shopify-payment-button__button--unbranded"
       );
       log('Buy Now button is clickable.')

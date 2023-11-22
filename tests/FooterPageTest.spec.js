@@ -25,6 +25,6 @@ test("Test footer elements", async ({ page }) => {
 
   await footer.subscribeToPage();
   const isSubscribed = await footer.confirmSubscription();
-  isSubscribed !== null? expect(isSubscribed).toBeTruthy() : expect(isSubscribed).toBeFalsy();
+  isSubscribed !== null ? expect(isSubscribed).toBeTruthy() : expect(isSubscribed).toBeFalsy();
 });
 // npx playwright test tests/FooterPageTest.spec.js
