@@ -55,3 +55,6 @@ test('should filter product according to product size', async ({ page }) => {
     await securePageForStorePage.isFilteredAccordingToSizeOrNot(testData.size)
 
 })
+/**
+ * npx playwright  test tests/storePage.spec.js
+ */

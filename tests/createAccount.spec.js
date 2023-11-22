@@ -23,3 +23,6 @@ test('should create an account', async ({ page }) => {
     const getAlertTextForCapchaPage = await secureCreateAccountPage.flashAlertForCapchaPage.textContent()
     expect(await getAlertTextForCapchaPage.includes(testData.expectedTextForCapchaPage)).toBeTruthy()
 })
+/**
+ * npx playwright test tests/createAccount.spec.js
+ */

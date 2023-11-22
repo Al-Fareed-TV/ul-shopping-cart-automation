@@ -40,15 +40,15 @@ class StorePage {
   }
 
   async outOfStockProducts() {
-    await this.actions.clickOnElementByText("Availability");
-    await this.actions.clickOnElementByText("In stock");
-    await this.actions.clickOnElementByText("Out of stock");
+    await this.actions.clickOnElementByLocatorAndText("#FacetsWrapperDesktop","Availability");
+    await this.actions.clickOnElementByLocatorAndText("#FacetsWrapperDesktop","In stock");
+    await this.actions.clickOnElementByLocatorAndText("#FacetsWrapperDesktop","Out of stock");
     await this.page.keyboard.press("Escape");
   }
 
   async checkInStockAvailabilityDesktop() {
-    await this.actions.clickOnElementByText("Availability");
-    await this.actions.clickOnElementByText("In stock");
+    await this.actions.clickOnElementByLocatorAndText("#FacetsWrapperDesktop","Availability");
+    await this.actions.clickOnElementByLocatorAndText("#FacetsWrapperDesktop","In stock");
     await this.page.keyboard.press("Escape");
   }
 
@@ -97,12 +97,6 @@ class StorePage {
     expect(isBuyNowButtonEnabled).toBeTruthy();
   }
 
-  async sortByPrice() {
-    await this.actions.clickOnElementByText("Price");
-    await this.actions.sendKeys("#Filter-Price-GTE", "0");
-    await this.actions.sendKeys("#Filter-Price-LTE", "500");
-    await this.actions.press("Escape");
-  }
   async verifyProductsOutOfStock() {
     const soldOutButton = await this.utils.getByRoleAndName(
       "button",
@@ -123,7 +117,6 @@ class StorePage {
     } else {
       await this.checkInStockAvailabilityDesktop();
       await this.sortByDesktop();
-      await this.sortByPrice();
     }
   }
   async checkInStockProducts() {
@@ -142,7 +135,7 @@ class StorePage {
 
   async filterBrands() {
     await this.page.goBack();
-    await this.actions.clickOnElementByText("Brand");
+    await this.actions.clickOnElementByLocatorAndText("#FacetsWrapperDesktop","Brand");
 
     for (let i = 1; i <= 10; i++) {
       if (await this.utils.isElementEnabled(await this.elements(i))) {

@@ -9,9 +9,7 @@ test("Send message in Contact Page", async ({ page }) => {
   const mainNav = MainNavigation.createMainNav(page);
   const contactPage = ContactPage.createContactPage(page);
 
-  // await page.setViewportSize({ width: 800, height: 800 }); 
   await utils.navigateToHome();
-  // await mainNav.selectNav('contact');
   await mainNav.goToContactPage();
 
   await expect(page).toHaveTitle(/Contact – ul-web-playground/);

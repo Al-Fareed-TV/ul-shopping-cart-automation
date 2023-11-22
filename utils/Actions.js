@@ -25,6 +25,9 @@ class Actions {
   async clickOnElementByText(text) {
     await this.page.getByText(text).click();
   }
+  async clickOnElementByLocatorAndText(selector,text){
+    await this.page.locator(selector).getByText(text).click();
+  }
 
   async sendKeys(selector, keys) {
     await this.page.fill(selector, keys);

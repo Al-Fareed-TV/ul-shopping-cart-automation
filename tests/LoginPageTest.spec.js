@@ -7,6 +7,6 @@ test("User LogIn", async ({ page }) => {
   const login = LoginPage.createLoginPage(page);
   const utils = commonUtils.createUtils(page);
   await utils.navigateToHome();
-  await login.login();
+  await login.loginUser();
 });
 //npx playwright  test tests/LoginPageTest.spec.js
