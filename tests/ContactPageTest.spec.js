@@ -1,4 +1,5 @@
 import { test, expect } from "@playwright/test";
+
 const commonUtils = require("../utils/commonUtils");
 const MainNavigation = require('../utils/MainNavigation');
 const ContactPage = require('../pages/ContactPage');
@@ -10,8 +11,8 @@ test("Send message in Contact Page", async ({ page }) => {
 
   // await page.setViewportSize({ width: 800, height: 800 }); 
   await utils.navigateToHome();
-
-  await mainNav.selectNav('contact');
+  // await mainNav.selectNav('contact');
+  await mainNav.goToContactPage();
 
   await expect(page).toHaveTitle(/Contact – ul-web-playground/);
 

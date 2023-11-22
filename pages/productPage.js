@@ -13,7 +13,7 @@ class ProductPage {
 
   async isImageAvailable() {
     try {
-      await this.utils.isElementVisible(
+      await this.utils.isElementVisibleBySelector(
         "#shopify-section-template--15328405717213__main > section > div > div.grid__item.product__media-wrapper > slider-component > ul > li > modal-opener > div"
       );
       log('Image is avaialble');

@@ -1,5 +1,8 @@
 const Actions = require("../utils/actions");
-
+const fs = require('fs');
+const yaml = require('js-yaml');
+const MainNavigation = require("../utils/MainNavigation");
+const data = yaml.load(fs.readFileSync('/Users/testvagrant/Documents/PlayWright-Automation/selectors/cartPageSelectors.yaml', 'utf8'));
 class CartPage {
   constructor(page) {
     this.page = page;
@@ -7,11 +10,11 @@ class CartPage {
   }
 
   async viewCart() {
-    await this.actions.clickOnSelector('#cart-icon-bubble > svg');
+    await this.actions.clickOnSelector((data['viewCart']));
   }
 
   async getNameOfItemInCart() {
-    const selector = "#CartItem-1 > td.cart-item__details > a";
+    const selector = data['itemNameInCart'];
     const timeout = 10000;
     let nameOfItem = await this.page.waitForSelector(selector, { timeout });
     const text = await nameOfItem.textContent();
@@ -19,7 +22,7 @@ class CartPage {
   }
 
   async getNumberOfItemsInCart() {
-    const inputElement = await this.page.$("#Quantity-1");
+    const inputElement = await this.page.$(data['numberOfItemsInCart']);
 
     const inputValue = await inputElement.inputValue();
     return inputValue;

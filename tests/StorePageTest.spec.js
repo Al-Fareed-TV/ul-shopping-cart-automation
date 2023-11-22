@@ -11,7 +11,7 @@ test("Select a product", async ({ page }) => {
 
   await utils.navigateToHome();
 
-  await mainNav.selectNav("store");
+  await mainNav.goToStorePage();
 
   await storePage.filterProducts();
 

@@ -9,21 +9,18 @@ class LoginPage {
     this.mainNav = MainNavigation.createMainNav(this.page);
   }
 
-  async login() {
-    await this.mainNav.selectNav("login");
+  static createLoginPage(page) {
+    return new LoginPage(page);
+  }
 
+  async loginUser() {
+    // await this.mainNav.selectNav("login");
+    await this.mainNav.goToLoginPage();
+    
     await this.actions.typeKeys("#CustomerEmail", getCredentials.email);
     await this.actions.typeKeys("#CustomerPassword", getCredentials.password);
 
     await this.actions.clickOnElementByText("Sign in")
-  }
-
-  async isLoggedIn() {
-    const pageTitle = await this.page.title();
-    return pageTitle;
-  }
-  static createLoginPage(page) {
-    return new LoginPage(page);
   }
 }
 

@@ -6,8 +6,8 @@ class CatalogPage {
   }
 
   async searchProduct(productName) {
-    await this.actions.clickOnSelector("#shopify-section-header > sticky-header > header > div > details-modal > details > summary > span > svg.modal__toggle-open.icon.icon-search");
-    await this.actions.sendKeys("id=Search-In-Modal", productName)
+    await this.actions.clickOnElementByRoleAndText("button","Search");
+    await this.actions.sendKeysByPlaceholder("Search", productName)
   }
 
   async selectProduct() {

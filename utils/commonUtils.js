@@ -12,22 +12,23 @@ class commonUtils {
     await this.page.goto(url);
   }
   async getPageTitle() {
-    return await this.page.title();
+    await this.waitToLoad();
+    const pageTitle = await this.page.title();
+    return pageTitle;
   }
+
   async navigateToHome() {
     await this.page.goto("https://web-playground.ultralesson.com/", {
       fullScreen: true,
     });
   }
-  async isElementVisible(selector) {
+  async isElementVisibleBySelector(selector) {
     const elementHandle = await this.page.isVisible(selector);
-    if (elementHandle) {
-      console.log("Element found..!");
-      return true;
-    } else {
-      console.log("Element not found..!");
-      return false;
-    }
+    if (elementHandle) return true;
+    return false;
+  }
+  async isElementVisible(element){
+    return await element.isVisible();
   }
 
   async isElementClickable(selector) {

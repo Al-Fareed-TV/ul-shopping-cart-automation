@@ -1,0 +1,4 @@
+viewCart : '#cart-icon-bubble > svg'
+itemNameInCart : '#CartItem-1 > td.cart-item__details > a'
+numberOfItemsInCart : '#Quantity-1'
+
